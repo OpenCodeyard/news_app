@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/helper/data.dart';
+import 'package:news_app/models/category_model.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -8,6 +10,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  List<CategoryModel> categories = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    categories = getcategories();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +42,7 @@ class _HomeState extends State<Home> {
         centerTitle: true,
       ),
       body: Container(
-        child: const CategoryTile(
-            categoryName: "Prosenjit's Marriage",
-            imageUrl:
-                "https://static2.tripoto.com/media/filter/tst/img/1939624/UserPhoto/1582256097_1582256096058.jpg"),
+        child: ,
       ),
     );
   }
