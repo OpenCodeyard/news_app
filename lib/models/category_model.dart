@@ -1,8 +1,6 @@
-class CategoryModel{
+class CategoryModel {
+  String categoryName;
+  String imageUrl;
 
-   String categoryName;
-   String imageUrl;
-
-  CategoryModel( this.categoryName,this.imageUrl);
-
+  CategoryModel(this.categoryName, this.imageUrl);
 }

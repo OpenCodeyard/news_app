@@ -1,6 +1,5 @@
 import 'package:news_app/models/category_model.dart';
 
-
 List<CategoryModel> getcategories() {
   List<CategoryModel> category = [];
 
@@ -25,14 +24,12 @@ List<CategoryModel> getcategories() {
   );
   category.add(categoryModel);
 
-
   //4
   categoryModel = CategoryModel(
     "Health",
     "https://images.unsplash.com/photo-1494390248081-4e521a5940db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1595&q=80",
   );
   category.add(categoryModel);
-
 
   //5
   categoryModel = CategoryModel(
@@ -41,7 +38,6 @@ List<CategoryModel> getcategories() {
   );
   category.add(categoryModel);
 
-
   //6
   categoryModel = CategoryModel(
     "Sports",
@@ -49,14 +45,12 @@ List<CategoryModel> getcategories() {
   );
   category.add(categoryModel);
 
-
   //7
   categoryModel = CategoryModel(
     "Technology",
     "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
   );
   category.add(categoryModel);
-  
 
   return category;
 }
