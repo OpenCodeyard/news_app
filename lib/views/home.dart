@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/helper/data.dart';
@@ -57,46 +58,50 @@ class _HomeState extends State<Home> {
         elevation: 0.0,
         centerTitle: true,
       ),
-      body: _loading ? Center(
-        child: Container(
-          child: CircularProgressIndicator(),
-        ),
-      ) : Container(
-        child: Column(
-          children: [
-
-            /// Categories
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              height: 70,
-              child: ListView.builder(
-                  itemCount: categories.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return CategoryTile(
-                      imageUrl: categories[index].imageUrl,
-                      categoryName: categories[index].categoryName,
-                    );
-                  }),
-            ),
-
-            /// Blogs
-
-            Container(
-              child: ListView.builder(
-                  itemCount: articles.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return BlogTile(
-                        imageUrl: articles[index].urlToImage,
-                        title: articles[index].title,
-                        description: articles[index].description);
-                  }),
+      body: _loading
+          ? Center(
+              child: Container(
+                child: CircularProgressIndicator(),
+              ),
             )
-          ],
-        ),
-      ),
+          : SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    /// Categories
+                    Container(
+                      height: 70,
+                      child: ListView.builder(
+                          itemCount: categories.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return CategoryTile(
+                              imageUrl: categories[index].imageUrl,
+                              categoryName: categories[index].categoryName,
+                            );
+                          }),
+                    ),
+
+                    /// Blogs
+
+                    Container(
+                      padding: EdgeInsets.only(top: 16),
+                      child: ListView.builder(
+                          itemCount: articles.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return BlogTile(
+                                imageUrl: articles[index].urlToImage,
+                                title: articles[index].title,
+                                description: articles[index].description);
+                          }),
+                    )
+                  ],
+                ),
+              ),
+            ),
     );
   }
 }
@@ -118,8 +123,8 @@ class CategoryTile extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(6),
-              child: Image.network(
-                imageUrl,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
                 width: 120,
                 height: 60,
                 fit: BoxFit.cover,
@@ -162,7 +167,14 @@ class BlogTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: [Image.network(imageUrl), Text(title), Text(description)],
+        children: [Image.network(imageUrl),
+          Text(title, style: const TextStyle(
+            fontSize: 17,
+            color: Colors.black87
+          ),),
+          Text(description, style: const TextStyle(
+            color: Colors.grey
+          ),)],
       ),
     );
   }
