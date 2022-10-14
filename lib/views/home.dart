@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/helper/data.dart';
 import 'package:news_app/helper/news.dart';
 import 'package:news_app/models/category_model.dart';
+import 'package:news_app/views/article_view.dart';
 
 import '../models/article_model.dart';
 
@@ -94,9 +95,11 @@ class _HomeState extends State<Home> {
                           physics: const ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return BlogTile(
-                                imageUrl: articles[index].urlToImage,
-                                title: articles[index].title,
-                                description: articles[index].description);
+                              imageUrl: articles[index].urlToImage,
+                              title: articles[index].title,
+                              description: articles[index].description,
+                              url: articles[index].url,
+                            );
                           }),
                     )
                   ],
@@ -155,35 +158,54 @@ class CategoryTile extends StatelessWidget {
 }
 
 class BlogTile extends StatelessWidget {
-  final String imageUrl, title, description;
+  final String imageUrl, title, description, url;
 
-  const BlogTile({
-    Key? key,
-    required this.imageUrl,
-    required this.title,
-    required this.description,
-  }) : super(key: key);
+  const BlogTile(
+      {Key? key,
+      required this.imageUrl,
+      required this.title,
+      required this.description,
+      required this.url})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16),
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-              child: Image.network(imageUrl)
-          ),
-          const SizedBox(height: 8,),
-          Text(title, style: const TextStyle(
-            fontSize: 18.5,
-            color: Colors.black87,
-            fontWeight: FontWeight.w500
-          ),),
-          const SizedBox(height: 6,),
-          Text(description, style: const TextStyle(
-            color: Colors.black54
-          ),)],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ArticleView(
+                    blogUrl: url,
+                )
+            ));
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        child: Column(
+          children: [
+            ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Image.network(imageUrl)),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              title,
+              style: const TextStyle(
+                  fontSize: 18.5,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              height: 6,
+            ),
+            Text(
+              description,
+              style: const TextStyle(color: Colors.black54),
+            )
+          ],
+        ),
       ),
     );
   }
