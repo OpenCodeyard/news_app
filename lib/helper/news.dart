@@ -18,14 +18,17 @@ class News {
         if (element["urlToImage"] != null && element['description'] != null) {
           ArticleModel articleModel = ArticleModel(
               title: element['title'],
-              author: element["author"],
+              author: element["author"] ?? "",
               description: element["description"],
               url: element["url"],
               urlToImage: element["urlToImage"],
-              publishedAt: element["publishedAt"],
-              content: element["context"]
-
+              content: element["content"] ?? ""
           );
+
+          news.add(articleModel);
+
+
+
         }
       });
     }

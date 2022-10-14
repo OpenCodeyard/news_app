@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/helper/data.dart';
+import 'package:news_app/helper/news.dart';
 import 'package:news_app/models/category_model.dart';
+
+import '../models/article_model.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,12 +15,25 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<CategoryModel> categories = [];
+  List<ArticleModel> articles = [];
+
+  bool _loading = true;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     categories = getcategories();
+    getNews();
+  }
+
+  getNews() async {
+    News newsClass = News();
+    await newsClass.getNews();
+    articles = newsClass.news;
+    setState(() {
+      _loading = false;
+    });
   }
 
   @override
@@ -41,9 +57,15 @@ class _HomeState extends State<Home> {
         elevation: 0.0,
         centerTitle: true,
       ),
-      body: Container(
+      body: _loading ? Center(
+        child: Container(
+          child: CircularProgressIndicator(),
+        ),
+      ) : Container(
         child: Column(
           children: [
+
+            /// Categories
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               height: 70,
@@ -56,6 +78,20 @@ class _HomeState extends State<Home> {
                       imageUrl: categories[index].imageUrl,
                       categoryName: categories[index].categoryName,
                     );
+                  }),
+            ),
+
+            /// Blogs
+
+            Container(
+              child: ListView.builder(
+                  itemCount: articles.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return BlogTile(
+                        imageUrl: articles[index].urlToImage,
+                        title: articles[index].title,
+                        description: articles[index].description);
                   }),
             )
           ],
