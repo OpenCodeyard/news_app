@@ -7,6 +7,7 @@ import 'package:news_app/models/category_model.dart';
 import 'package:news_app/views/article_view.dart';
 
 import '../models/article_model.dart';
+import 'category_news.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -88,7 +89,7 @@ class _HomeState extends State<Home> {
                     /// Blogs
 
                     Container(
-                      padding: EdgeInsets.only(top: 16),
+                      padding: const EdgeInsets.only(top: 16),
                       child: ListView.builder(
                           itemCount: articles.length,
                           shrinkWrap: true,
@@ -120,7 +121,15 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CategoryView(
+                  category: categoryName.toLowerCase(),
+                    )
+            ));
+      },
       child: Container(
         margin: const EdgeInsets.only(right: 16),
         child: Stack(
@@ -176,9 +185,8 @@ class BlogTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => ArticleView(
-                    blogUrl: url,
-                )
-            ));
+                      blogUrl: url,
+                    )));
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
