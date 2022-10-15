@@ -5,8 +5,8 @@ import '../models/article_model.dart';
 import 'article_view.dart';
 
 class CategoryView extends StatefulWidget {
-
   final String category;
+
   const CategoryView({Key? key, required this.category}) : super(key: key);
 
   @override
@@ -14,7 +14,6 @@ class CategoryView extends StatefulWidget {
 }
 
 class _CategoryViewState extends State<CategoryView> {
-
   List<ArticleModel> articles = [];
   bool _loading = true;
 
@@ -55,9 +54,8 @@ class _CategoryViewState extends State<CategoryView> {
           Opacity(
             opacity: 0,
             child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16)
-                ,child: const Icon(Icons.save)
-            ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: const Icon(Icons.save)),
           )
         ],
         backgroundColor: Colors.greenAccent,
@@ -66,49 +64,48 @@ class _CategoryViewState extends State<CategoryView> {
       ),
       body: _loading
           ? Center(
-        child: Container(
-          child: CircularProgressIndicator(),
-        ),
-      )
-          :  SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-             child: Column(
-              children: [
-              /// Blogs
-              Container(
-                padding: const EdgeInsets.only(top: 16),
-                child: ListView.builder(
-                    itemCount: articles.length,
-                    shrinkWrap: true,
-                    physics: const ClampingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return BlogTile(
-                        imageUrl: articles[index].urlToImage,
-                        title: articles[index].title,
-                        description: articles[index].description,
-                        url: articles[index].url,
-                      );
-                    }),
-              )
-            ],
-        ),
-      ),
-          ),
+              child: Container(
+                child: const CircularProgressIndicator(),
+              ),
+            )
+          : SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    /// Blogs
+                    Container(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: ListView.builder(
+                          itemCount: articles.length,
+                          shrinkWrap: true,
+                          physics: const ClampingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return BlogTile(
+                              imageUrl: articles[index].urlToImage,
+                              title: articles[index].title,
+                              description: articles[index].description,
+                              url: articles[index].url,
+                            );
+                          }),
+                    )
+                  ],
+                ),
+              ),
+            ),
     );
   }
 }
-
 
 class BlogTile extends StatelessWidget {
   final String imageUrl, title, description, url;
 
   const BlogTile(
       {Key? key,
-        required this.imageUrl,
-        required this.title,
-        required this.description,
-        required this.url})
+      required this.imageUrl,
+      required this.title,
+      required this.description,
+      required this.url})
       : super(key: key);
 
   @override
@@ -119,9 +116,8 @@ class BlogTile extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => ArticleView(
-                  blogUrl: url,
-                )
-            ));
+                      blogUrl: url,
+                    )));
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
@@ -153,4 +149,3 @@ class BlogTile extends StatelessWidget {
     );
   }
 }
-
