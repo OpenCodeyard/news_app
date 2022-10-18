@@ -63,12 +63,12 @@ class _HomeState extends State<Home> {
       body: _loading
           ? Center(
               child: Container(
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               ),
             )
           : SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
                     /// Categories
