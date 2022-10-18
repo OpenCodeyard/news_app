@@ -37,6 +37,9 @@ class _CategoryViewState extends State<CategoryView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black
+        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
@@ -58,15 +61,14 @@ class _CategoryViewState extends State<CategoryView> {
                 child: const Icon(Icons.save)),
           )
         ],
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.white,
         centerTitle: true,
         elevation: 0.0,
       ),
       body: _loading
-          ? Center(
-              child: Container(
-                child: const CircularProgressIndicator(),
-              ),
+          ? const Center(
+              child:
+              CircularProgressIndicator(),
             )
           : SingleChildScrollView(
               child: Container(
